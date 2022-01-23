@@ -13,14 +13,16 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Home</a>
-        <a href="#">Friends</a>
-        <a href="#">Groups</a>
-        <a href="#">Bills</a>
-        <a href="#">Help</a>
+        <a href="home.html">Home</a>
+        <a href="friends.html">Friends</a>
+        <a href="groups.html">Groups</a>
+        <a href="bills.html">Bills</a>
+        <a href="#" disabled>Help</a>
     </div>
     
     <span onclick="openNav()" class="Options">Options</span>
+
+    
 
     <div id="lout">
     <a href="/login.html">Log-out</a>
@@ -30,7 +32,6 @@
     <!-- Use any element to open the sidenav -->
 
         <h1>payShare</h1><br><br>
-        <h4>Monthly Summary</h4>
     </div>
 
     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
@@ -45,8 +46,10 @@
         }
 
         function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
+            //document.getElementById("mySidenav").style.width = "0";
         }
+
+        openNav();
     </script>
 </body>
 
