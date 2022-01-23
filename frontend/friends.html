@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +9,7 @@
 
         <style>
             .column {width: 40%;}
-            .list_div {border-style: solid; height: 50vh; overflow: auto;}
+            .list_div {border-style: solid; height: 50vh; overflow: auto; padding-left: 10px; padding-right: 10px;}
             .current_friend {border-style: none; margin: 1%;}
         </style>
     </head>
@@ -29,106 +28,95 @@
 
         function search_user() {
             let e = null;
-            while (e = document.getElementById("users_search_list").lastChild) {
+            while (document.getElementById("users_search_list").children.length > 1) {
+                e = document.getElementById("users_search_list").children[0];   
+                if (e == document.getElementById("friend_search"))
+                {
+                    e = document.getElementById("users_search_list").children[1];
+                }
                 document.getElementById("users_search_list").removeChild(e);
             }
 
-            // TODO: search in using the backend
-            matching_users = ["__match1", "match2", "match3"];
+            // TODO: search using the backend, store the name (or username) of the matches in the list
+            matching_users = [document.getElementById("friend_search").value];
 
             for (let i=0 ; i<matching_users.length ; i++) {
-                let p_username = document.createElement('p');
-                let b_button = document.createElement('button');
-                
-                p_username.innerText = matching_users[i];
-                b_button.setAttribute("style", "float:right");
-                b_button.setAttribute("type", "button");
-                b_button.innerHTML = "Add friend";
-                let f = "add_friend(" +  i  + ")";
-                b_button.setAttribute("onclick", f);
-
-                p_username.appendChild(b_button);
-                document.getElementById("users_search_list").appendChild(p_username);
+                if (matching_users[i].trim().length > 3) {
+                    let p_username = document.createElement('p');
+                    let b_button = document.createElement('button');
+                    
+                    p_username.innerText = matching_users[i];
+                    b_button.setAttribute("style", "float:right");
+                    b_button.setAttribute("type", "button");
+                    b_button.innerHTML = "Add friend";
+                    let f = "add_friend(" +  i  + ")";
+                    b_button.setAttribute("onclick", f);
+    
+                    p_username.appendChild(b_button);
+                    document.getElementById("users_search_list").appendChild(p_username);
+                }
             }
         }
     </script>
 
-<body>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Home</a>
-        <a href="#">Friends</a>
-        <a href="#">Groups</a>
-        <a href="#">Bills</a>
-        <a href="#">Help</a>
-    </div>
-    
-    <span onclick="openNav()" class="Options">Options</span>
-
-    <div id="lout">
-    <a href="/login.html">Log-out</a>
-    </div>
-
-    <div id="main">
-        <div class="column" style="float: left; padding-left: 10vh;">
-            <h2 style="text-align: center;">Friend list</h2>
-            <div class="list_div">
-                <p id="no_friends">You have no friends yet</p>
+    <body>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">Home</a>
+            <a href="#">Friends</a>
+            <a href="#">Groups</a>
+            <a href="#">Bills</a>
+            <a href="#">Help</a>
+        </div>
         
-                <script>
-                    // TODO: search using the backend for the friends
-                    var friend_list = ["mysuperfriend1", "friend2", "david", "marcos"];
-                    
-                    if (friend_list.length > 0) {
-                        document.getElementById("no_friends").remove();
-                        for (let i=0; i<friend_list.length ; i++) {
-                            document.write("<div class=\"current_friend\">");
-                            document.write("<p>" + friend_list[i]);
-                            let f_str = "split_bill_with_friend(friend_list[" + i + "])";
-                            document.write("<button style='float:right;' type=\"button\" onclick=\"" + f_str + "\">Split bill</button>");
-                            document.write("</p>" + "</div>");
+        <span onclick="openNav()" class="Options">Options</span>
+
+        <div id="lout">
+        <a href="/login.html">Log-out</a>
+        </div>
+
+        <div id="main">
+            <div class="column" style="float: left;">
+                <h2 style="text-align: center;">Friend list</h2>
+                <div class="list_div">
+                    <p id="no_friends">You have no friends yet</p>
+            
+                    <script>
+                        // TODO: search using the backend for the friends. Store the name (or username) of all friends in the next list.
+                        var friend_list = ["mysuperfriend1", "friend2", "david", "marcos"];
+                        
+                        if (friend_list.length > 0) {
+                            document.getElementById("no_friends").remove();
+                            for (let i=0; i<friend_list.length ; i++) {
+                                document.write("<div class=\"current_friend\">");
+                                document.write("<p>" + friend_list[i]);
+                                let f_str = "split_bill_with_friend(friend_list[" + i + "])";
+                                document.write("<button style='float:right;' type=\"button\" onclick=\"" + f_str + "\">Split bill</button>");
+                                document.write("</p>" + "</div>");
+                            }
                         }
-                    }
-                </script>
-        
+                    </script>
+            
+                </div>
+            </div>
+            
+            <div class="column" style="float: right;">
+                <h2 style="text-align: center;">Search users:</h2>
+                <div class="list_div" id="users_search_list">
+                    <input type="text" placeholder="Search users" id="friend_search" onkeyup="search_user()">
+                </div>
             </div>
         </div>
-        
-        <div class="column" style="float: right; padding-right: 10vh;">
-            <h2 style="text-align: center;">Search users: <input type="text" placeholder="Search users" id="friend_search" onkeyup="search_user()"></h2>
-            <div class="list_div" id="users_search_list"></div>
-        </div>
-    </div>
 
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "500px";
-        }
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "500px";
+            }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
-</body>
-
-</html>
-
-<!---
-<!DOCTYPE html>
-<html>
-
-    
-
-    <head>
-        
-    </head>
-
-    <body>
-            
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
     </body>
 
 </html>
-
-
---><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->

@@ -65,6 +65,7 @@
                 document.getElementById("search_group_list").removeChild(e);
             }
 
+            // TODO: connect with the backend. Store the names of the matches in the next list.
             matching_groups = ["group1", "match2", "more matches", "even more", document.getElementById("group_search").value];
             for (let i=0 ; i<matching_groups.length ; i++) {
                 if (matching_groups[i].trim().length > 0){
@@ -82,7 +83,7 @@
                 }
             }
 
-            // TODO: connecto with the backend
+            // TODO: connect with the backend
         }
 
         function add_friend_to_group(i) {
@@ -99,7 +100,6 @@
                     document.getElementById("create_group_button").disabled = true;
                 }
             } else {
-                // Add
                 friends_for_group.push(document.getElementById("div_friend_list").children[i].textContent.split("Add")[0]);
                 document.getElementById("create_group_button").removeAttribute("disabled");
             }
@@ -109,7 +109,7 @@
         function create_group() {
             // ask for group name?
 
-            // TODO : connect with the backend
+            // TODO : connect with the backend, create the group
             
             for (var i=1 ; i<document.getElementById("div_friend_list").children.length ; i++) {
                 document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
@@ -117,7 +117,7 @@
             
             friends_for_group = [];
             
-            // show new group in group list
+            // show new group in group list (only if successfull)
         }
 
     </script>
