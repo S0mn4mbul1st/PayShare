@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Groups</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                }
+
+                .column {
+                    float: left;
+                    width: 33.33%;
+                    padding: 10px;
+                }
+
+                .row:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+
+                h2 {
+                    text-align: center;
+                }
+
+                .inside_div{
+                    border-style: solid;
+                    height: 65vh;
+                    overflow: auto;
+                    padding-left: 1vh;
+                    padding-right: 1vh;
+                }
+
+        </style>
+
+    </head>
+
+    <script>
+        var matching_groups = [];
+        var friends_for_group = [];
+        
+        // TODO: connect with the backend
+        var group_list = ["my_group1", "second group", "supergrupo"];
+
+        // TODO: connect with the backend
+        var friend_list = ["friend1", "f2", "more friends", "super friend", "david"];
+
+        function join_group(group_index) {
+            // TODO: conect with the backend and join the group
+
+            let b = document.getElementById("search_group_list").children[group_index].children[0];
+            b.disabled = true;
+            b.innerText = "Pending";
+        }
+        
+        function search_group() {
+            let e = null;
+            while (e = document.getElementById("search_group_list").lastChild) {
+                document.getElementById("search_group_list").removeChild(e);
+            }
+
+            matching_groups = ["group1", "match2", "more matches", "even more", document.getElementById("group_search").value];
+            for (let i=0 ; i<matching_groups.length ; i++) {
+                if (matching_groups[i].trim().length > 0){
+                    let p = document.createElement("p");
+                    p.innerText = matching_groups[i];
+
+                    let b = document.createElement("button");
+                    let f = "join_group(" + i + ")";
+                    b.innerText = "Join";
+                    b.setAttribute("onclick", f);
+                    b.setAttribute("style", "float:right;");
+
+                    p.appendChild(b);
+                    document.getElementById("search_group_list").appendChild(p);
+                }
+            }
+
+            // TODO: connecto with the backend
+        }
+
+        function add_friend_to_group(i) {
+            current = document.getElementById("div_friend_list").children[i].children[0].textContent; 
+            if (current == "Remove") {
+                var new_list = [];
+                for (let index=0 ; index<friends_for_group.length ; index++) {
+                    if (friends_for_group[index].trim() != document.getElementById("div_friend_list").children[i].textContent.split("Remove")[0].trim()) {
+                        new_list.push(friends_for_group[index]);
+                    }
+                }
+                friends_for_group = new_list;
+                if (new_list.length <= 0) {
+                    document.getElementById("create_group_button").disabled = true;
+                }
+            } else {
+                // Add
+                friends_for_group.push(document.getElementById("div_friend_list").children[i].textContent.split("Add")[0]);
+                document.getElementById("create_group_button").removeAttribute("disabled");
+            }
+            document.getElementById("div_friend_list").children[i].children[0].textContent = document.getElementById("div_friend_list").children[i].children[0].textContent == "Remove" ? "Add" : "Remove";
+        }
+
+        function create_group() {
+            // ask for group name?
+
+            // TODO : connect with the backend
+            
+            for (var i=1 ; i<document.getElementById("div_friend_list").children.length ; i++) {
+                document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
+            }
+            
+            friends_for_group = [];
+            
+            // show new group in group list
+        }
+
+    </script>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">Friends</a>
+        <a href="#">Groups</a>
+        <a href="#">Bills</a>
+        <a href="#">Help</a>
+    </div>
+    
+    <span onclick="openNav()" class="Options">Options</span>
+
+    <div id="lout">
+    <a href="/login.html">Log-out</a>
+    </div>
+
+    <div class="row">
+        <div class="column" style="background-color:white;">
+          <h2>Group list</h2>
+          <div class="inside_div">
+            <script>
+                for (let i=0 ; i<group_list.length ; i++) {
+                    document.write("<p>");
+                    document.write(group_list[i]);
+                    document.write("<button style='float:right; margin-left: 5px' type='button'> Split bill </button>")
+                    document.write("<button style='float:right;' type='button' disabled> Details </button>")
+                    document.write("</p>");
+                }
+            </script>
+          </div>
+        </div>
+        <div class="column" style="background-color:white;">
+          <h2>Search friends for new group</h2>
+          <div class="inside_div" id="div_friend_list">
+            <script>
+                for (let i=0 ; i<friend_list.length ; i++) {
+                    document.write("<p>");
+                    document.write(friend_list[i]);
+                    let f_str = "add_friend_to_group(" + (i+1) + ")";
+                    document.write("<button style='float:right;' type='button' onclick='" + f_str + "'> Add </button>");
+                    document.write("</p>");
+                }
+            </script>
+          </div>
+          <br>
+          <button type="button" onclick="create_group()" disabled id="create_group_button">Create group</button>
+        </div>
+        <div class="column" style="background-color:white;">
+          <h2>Search groups</h2>
+          <div class="inside_div">
+              <input type="text" placeholder="Search groups" id="group_search" onkeyup="search_group()" style="width:100%;">
+              <div id="search_group_list">
+                <script>
+                </script>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>
+
