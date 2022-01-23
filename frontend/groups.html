@@ -46,10 +46,10 @@
         var friends_for_group = [];
         
         // TODO: connect with the backend
-        var group_list = ["my_group1", "second group", "supergrupo"];
+        var group_list = ["Basket team", "Erasmus Wroclaw", "Roommates", "Uni"];
 
         // TODO: connect with the backend
-        var friend_list = ["friend1", "f2", "more friends", "super friend", "david"];
+        var friend_list = ["David Gonzalez", "Lorenzo Morini", "Agustín García", "Daniel Fernandez", "Alexander Müller", "John Foster", "Juan Menéndez", "Lucas Martínez", "Aykhan Imanov", "Tania Marchena"].sort();
 
         function join_group(group_index) {
             // TODO: conect with the backend and join the group
@@ -66,9 +66,9 @@
             }
 
             // TODO: connect with the backend. Store the names of the matches in the next list.
-            matching_groups = ["group1", "match2", "more matches", "even more", document.getElementById("group_search").value];
+            matching_groups = [document.getElementById("group_search").value];
             for (let i=0 ; i<matching_groups.length ; i++) {
-                if (matching_groups[i].trim().length > 0){
+                if (matching_groups[i].trim().length >= 5){
                     let p = document.createElement("p");
                     p.innerText = matching_groups[i];
 
@@ -107,17 +107,37 @@
         }
 
         function create_group() {
-            // ask for group name?
+            var name = "";
+            while (name == "") {
+                name = prompt("Name for the group: ");
+            }
+
 
             // TODO : connect with the backend, create the group
             
             for (var i=1 ; i<document.getElementById("div_friend_list").children.length ; i++) {
                 document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
             }
-            
+
             friends_for_group = [];
             
             // show new group in group list (only if successfull)
+            if (true) {
+                let p = document.createElement("p");
+                p.innerText = name;
+                let b1 = document.createElement("button");
+                let b2 = document.createElement("button");
+                b1.innerText = "Details";
+                b2.innerText = "Split bill";
+                b2.setAttribute("style", "float:right; margin-left: 5px");
+                b1.setAttribute("style", "float:right;");
+                b1.disabled = true;
+                p.appendChild(b2);
+                p.appendChild(b1);
+                document.getElementById("div_my_groups").appendChild(p);            
+            }
+
+            document.getElementById("create_group_button").disabled = true;
         }
 
     </script>
@@ -142,7 +162,7 @@
     <div class="row">
         <div class="column" style="background-color:white;">
           <h2>Group list</h2>
-          <div class="inside_div">
+          <div class="inside_div" id="div_my_groups">
             <script>
                 for (let i=0 ; i<group_list.length ; i++) {
                     document.write("<p>");

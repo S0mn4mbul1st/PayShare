@@ -23,6 +23,8 @@
         }
 
         function add_friend(i) {
+            document.getElementById("users_search_list").children[i+1].children[0].innerText = "Pending";
+            document.getElementById("users_search_list").children[i+1].children[0].disabled = true;
             // TODO: call the backend and add new friend
         }
 
@@ -38,10 +40,15 @@
             }
 
             // TODO: search using the backend, store the name (or username) of the matches in the list
-            matching_users = [document.getElementById("friend_search").value];
+            if (document.getElementById("friend_search").value.endsWith(" ")) {
+                matching_users = [document.getElementById("friend_search").value.trim()+" García", document.getElementById("friend_search").value.trim()+" Romero",  document.getElementById("friend_search").value.trim()+" Suárez",  document.getElementById("friend_search").value.trim()+" Menéndez", document.getElementById("friend_search").value.trim()+" Rodríguez", document.getElementById("friend_search").value.trim()+" Noriega"].sort();
+            } else 
+            { 
+                matching_users.clear();
+            }
 
             for (let i=0 ; i<matching_users.length ; i++) {
-                if (matching_users[i].trim().length > 3) {
+                if (matching_users[i].trim().length >= 4) {
                     let p_username = document.createElement('p');
                     let b_button = document.createElement('button');
                     
@@ -83,7 +90,7 @@
             
                     <script>
                         // TODO: search using the backend for the friends. Store the name (or username) of all friends in the next list.
-                        var friend_list = ["mysuperfriend1", "friend2", "david", "marcos"];
+                        var friend_list =  ["David Gonzalez", "Lorenzo Morini", "Agustín García", "Daniel Fernandez", "Alexander Müller", "John Foster", "Juan Menéndez", "Lucas Martínez", "Aykhan Imanov", "Tania Marchena"].sort();
                         
                         if (friend_list.length > 0) {
                             document.getElementById("no_friends").remove();
