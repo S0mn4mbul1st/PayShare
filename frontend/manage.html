@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="kmrn.css">
+
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="home.html">Home</a>
+    <a href="friends.html">Friends</a>
+    <a href="groups.html">Groups</a>
+    <a href="manage.html">Manage Expenses</a>
+    <a href="bills.html">Bills</a>
+    <a href="#" disabled>Help</a>
+  </div>
+  <span onclick="openNav()" class="Options">Options</span>
+  <div class="parent">
+    <h1>Split by category</h1>
+
+    <div class="child-one">
+      <br>
+      &nbsp; &nbsp; <label for="fname">Add category:</label>
+      <select name="categories1" id="categories1">
+        <option value="Electricity:">Electricity</option>
+        <option value="Food:">Food</option>
+        <option value="clothes:">Clothes</option>
+        <option value="Leisure:">Leisure</option>
+      </select>
+      <!--<input type="text" id="category" name="category" > --><br><br>
+      &nbsp; &nbsp; <label for="lname">Electricity:</label>
+      <input type="text" id="electricity" name="electricity">
+      <p id="result-electricity"></p>
+      &nbsp; &nbsp; <label for="lname">Food:</label>
+      <input type="text" id="food" name="food">
+      <p id="result-food"></p>
+      &nbsp; &nbsp;<label for="total">Total: </label>
+      <input type="text" id="total" name="total">&nbsp; &nbsp;
+      <button onclick="calculate()">Calculate</button>
+    </div>
+  </div>
+
+  <div class="parent2">
+    <h1>Log payment</h1>
+
+    <div class="child-two">
+      <br>
+      <br>
+      &nbsp; &nbsp;<label for="fname">Amount:</label>
+      <input type="text" id="value" name="value"><br> <br> <br> <br>
+
+      &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
+      <select name="cat" id="cat">
+        <option value="Electricity:">Electricity</option>
+        <option value="Food:">Food</option>
+        <option value="clothes:">Clothes</option>
+        <option value="Leisure:">Leisure</option>
+        <option value="Bill:">Bill</option>
+      </select>
+      <br>
+      <br>
+      <button onclick="add()">Submit Payment</button>
+
+      <button onclick="show()">Create expense report</button>
+    </div>
+    
+  </div>
+
+
+  <div class="parent3">
+    <h1>Split by time</h1>
+
+    <div class="child-three">
+      <label for="fname">Select period:</label>
+      <select name="categories1" id="categories1">
+        <option value="Weeks:">Weeks</option>
+        <option value="Months:">Months</option>
+      </select>
+      <br>
+      <br>
+      <label for="lname">Week 1: </label>
+      <input type="text" id="week1" name="week1">
+      <p id="week1-t"></p>
+      <label for="lname">Week 2: </label>
+      <input type="text" id="week2" name="week2">
+      <p id="week2-t"></p>
+      <label for="lname">Week 3: </label>
+      <input type="text" id="week3" name="week3">
+      <p id="week3-t"></p>
+      <label for="lname">Week 4: </label>
+      <input type="text" id="week4" name="week41">
+      <p id="week4-t"></p>
+      <label for="lname">Total: </label>
+      <input type="text" id="total-t" name="total-t">&nbsp; &nbsp;
+      <button onclick="calculate2()">Calculate</button>
+
+    </div>
+  </div>
+
+  <script>
+    var payments = [];
+    function calculate() {
+      total = parseFloat(document.getElementById("total").value);
+      elec = parseFloat(document.getElementById("electricity").value);
+      food = parseFloat(document.getElementById("food").value);
+      document.getElementById("result-electricity").innerHTML = "&nbsp; &nbsp;" + elec / 100 * total + "€";
+      document.getElementById("result-food").innerHTML = "&nbsp; &nbsp;" + food / 100 * total + "€";
+    }
+    function calculate2() {
+      total = parseFloat(document.getElementById("total-t").value);
+      week1 = parseFloat(document.getElementById("week1").value);
+      week2 = parseFloat(document.getElementById("week2").value);
+      week3 = parseFloat(document.getElementById("week3").value);
+      week4 = parseFloat(document.getElementById("week4").value);
+      document.getElementById("week1-t").innerHTML = "&nbsp; &nbsp;" + week1 / 100 * total + "€";
+      document.getElementById("week2-t").innerHTML = "&nbsp; &nbsp;" + week2 / 100 * total + "€";
+      document.getElementById("week3-t").innerHTML = "&nbsp; &nbsp;" + week3 / 100 * total + "€";
+      document.getElementById("week4-t").innerHTML = "&nbsp; &nbsp;" + week4 / 100 * total + "€";
+    }
+    function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    function add(){
+      cat = document.getElementById("cat").value;
+      value = document.getElementById("value").value;
+      payments.push(cat + " " + value + "€");
+      window.alert("Payment submitted");
+      document.getElementById("value").value = "";
+    }
+    function show(){
+      window.alert(getPayments());
+    }
+    function getPayments(){
+      ret = ""
+      for (var i = 0; i < payments.length; i++)
+        ret += payments[i] + "; ";
+      return ret;
+    }
+  </script>
+
+
+</body>
+
+</html>
