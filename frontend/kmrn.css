@@ -1,0 +1,137 @@
+body 
+{
+	margin:0;
+	padding:0;
+	font-family:san-serif;
+   
+  
+  background-repeat: no-repeat,repeat;
+}
+
+
+
+
+.parent{
+    position: absolute;
+    top: 50px;
+    left: 55px;
+    
+    
+}
+
+.parent h1{
+    font-size: 48px;   
+}
+
+/* Child one */
+.child-one{
+    background-color: #D1E6FF;
+    position: absolute;
+    height: 250px;
+    width: 300px;
+    top: 150px;
+	border-radius: 5%;
+
+	
+
+}
+
+.child-one input {
+    position: relative;
+    width: 75px;
+    left: 20px;
+}
+
+/* Child two */
+
+.parent2{
+    position: absolute;
+    top: 50px;
+    left: 650px;
+    
+    
+}
+
+.parent2 h1{
+    font-size: 48px;   
+}
+
+.child-two{
+    background-color: #D1E6FF;
+    position: absolute;
+    height: 250px;
+    width: 300px;
+    top: 150px;
+  
+	border-radius: 5%;
+
+	
+
+}
+
+.child-two input {
+    position: relative;
+    width: 75px;
+    left: 20px;
+}
+
+/* Child three */
+
+.parent3{
+    position: absolute;
+    top: 500px;
+    left: 55px;
+    
+    
+}
+
+.parent3 h1{
+    font-size: 48px;   
+}
+
+.child-three{
+    background-color: #D1E6FF;
+    position: absolute;
+    height: 250px;
+    width: 300px;
+    top: 150px;
+
+	border-radius: 5%;
+
+	
+
+}
+
+.child-three input {
+    position: relative;
+    width: 75px;
+    left: 20px;
+}
+
+
+input[type=submit] {
+    position: relative;
+    top: 500px;
+    left: 775px;
+
+    background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
