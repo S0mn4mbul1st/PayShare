@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>payShare New Bill</title>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="home.html">Home</a>
+        <a href="friends.html">Friends</a>
+        <a href="groups.html">Groups</a>
+        <a href="manage.html">Manage Expenses</a>
+        <a href="bills.html">Bills</a>
+        <a href="#" disabled>Help</a>
+    </div>
+
+    <span onclick="openNav()" class="Options">Options</span>
+
+    <div id="lout">
+        <a href="login.html">Log-out</a>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        openNav();
+    </script>
+</body>
+</html>

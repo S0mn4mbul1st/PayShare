@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bills-style.css">
+
+  <title>payShare Bills</title>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="home.html">Home</a>
+    <a href="friends.html">Friends</a>
+    <a href="groups.html">Groups</a>
+    <a href="manage.html">Manage Expenses</a>
+    <a href="bills.html">Bills</a>
+    <a href="#" disabled>Help</a>
+  </div>
+
+  <div id="lout">
+    <a href="login.html">Log-out</a>
+</div>
+
+  <span onclick="openNav()" class="Options">Options</span>
+  <div class="parent">
+    <h1>Active Bills</h1>
+
+    <div class="child-one">
+      <br>
+
+      <!--<input type="text" id="category" name="category" > --><br><br>
+      &nbsp; &nbsp; <label for="lname">Bill:</label> <br><br>
+
+      &nbsp; &nbsp;<label for="total">Total: </label>
+      <input type="text" id="total" name="total">&nbsp; &nbsp;
+      <button onclick="calculate()">Pay</button>
+    </div>
+  </div>
+
+  <div class="parent2">
+    <h1>Pending Bills</h1>
+    <div class="child-two">
+      <br>
+      <br>
+      &nbsp; &nbsp;<label for="fname">Amount:</label>
+      <input type="text" id="value" name="value"><br> <br> <br> <br>
+
+      &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
+      <select name="cat" id="cat">
+
+        <option value="Bill:">Bill</option>
+      </select>
+      <br>
+      <br>
+      <button onclick="show()">Accept</button>
+    </div> 
+  </div>
+  </div>
+
+  <div class="parent3">
+    <a href="newbill.html"><button>Create New Bill</button></a>
+  </div>
+
+  <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        openNav();
+  </script>
+
+</body>
+
+</html>
