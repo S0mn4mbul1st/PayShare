@@ -1,10 +1,13 @@
 .body{
   font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+	padding:0;
+
+  background-repeat: no-repeat,repeat;
+
 }
 
 .wrapper {
-  font-family: Arial, Helvetica, sans-serif;
-  position: relative;
   max-width: 500px;
   margin: auto;
   text-align: center;
@@ -17,7 +20,6 @@ h1 {
 #lout {
   position: relative;
   float: right;
-
 }
 
 /* style the container */
@@ -63,21 +65,7 @@ input:hover,
 }
 
 
-/* style the submit button */
-input[type=submit] {
-  background-color: #0686fd;
-  color: white;
-  cursor: pointer;
-}
 
-input[type=submit]:hover {
-  background-color: #000000;
-}
-
-.col {
-  padding: 0 50px;
-  margin-top: 6px;
-}
 
 .company-check {
     position: relative;
