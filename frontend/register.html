@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
+<script>
+    function register(){
+        if (fetch('POST /auth/signup/reg HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+        .then(response => response.json()).map((c,w) => w)) {
+            window.location.href = "login.html";
+        }
+    }
+</script>
+
 <body>
     <br><br><br>
     <div class="wrapper">
@@ -15,7 +24,7 @@
 
         <h2>Sign Up</h2>
         <h5>Please fill this form to create an account.</h5>
-        <form method="post" action="/signup">
+        <form>
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control">
@@ -36,7 +45,7 @@
                 <input type="checkbox" id="company-check">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" onclick="register()">
                 <input type="reset" class="btn btn-secondary" value="Reset">
             </div>
         </form>

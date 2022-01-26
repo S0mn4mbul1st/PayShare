@@ -10,7 +10,10 @@
 
 <script>
   function log_in() {
-    window.location.href = "home.html";
+    if (fetch('POST /auth/signup/auth_log HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+        .then(response => response.json()).map((c,w) => w)) {
+            window.location.href = "home.html";
+        }
   }
 </script>
 
