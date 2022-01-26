@@ -7,7 +7,9 @@ body
   
 }
 
-
+h2 {
+  text-align: center;
+}
 
 .parent{
     position: absolute;
@@ -45,7 +47,7 @@ body
 .parent2{
     position: absolute;
     top: 50px;
-    left: 650px;
+    left: 850px;
     text-align: center;    
     
 }
@@ -79,7 +81,7 @@ body
 
 .parent3{
     position: absolute;
-    top: 400px;
+    top: 380px;
     left: 55px;
     
     
@@ -95,7 +97,7 @@ body
     position: relative;
     height: 300px;
     width: 400px;
-    top: 10px;
+    top: 10x;
     text-align: center;
 
 	border-radius: 5%;
@@ -177,9 +179,49 @@ body
   .sidenav a {font-size: 18px;}
 }
 
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
 
+footer { 
+  position: absolute;
+  bottom:0;
+  width:100%;
+  height:60px;   /* Height of the footer */
+  text-align: right;
+}
 
+#lout {
+  position: relative;
+  float: right;
+}
+
+header {
+  position: relative;
+  top:0px;
+  height: 60px;
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  color: #0686fd;
+}
 
 
 

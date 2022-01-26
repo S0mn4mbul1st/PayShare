@@ -1,145 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles.css">
-        <title>Groups</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Groups</title>
 
-        <style>
-            * {
-                box-sizing: border-box;
-                }
-
-                .column {
-                    float: left;
-                    width: 33.33%;
-                    padding: 10px;
-                }
-
-                .row:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                }
-
-                h2 {
-                    text-align: center;
-                }
-
-                .inside_div{
-                    border-style: solid;
-                    height: 65vh;
-                    overflow: auto;
-                    padding-left: 1vh;
-                    padding-right: 1vh;
-                }
-
-        </style>
-
-    </head>
-
-    <script>
-        var matching_groups = [];
-        var friends_for_group = [];
-        
-        // TODO: connect with the backend
-        var group_list = fetch('POST /auth/signup/groups HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
-        .then(response => response.json());
-
-        // TODO: connect with the backend
-        var friend_list = fetch('POST /auth/signup/friends HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
-        .then(response => response.json());
-
-        function join_group(group_index) {
-            // TODO: conect with the backend and join the group
-
-            let b = document.getElementById("search_group_list").children[group_index].children[0];
-            b.disabled = true;
-            b.innerText = "Pending";
+    <style>
+        * {
+            box-sizing: border-box;
+            float: center;
+            font-family: Arial, Helvetica, sans-serif;   
+            
         }
-        
-        function search_group() {
-            let e = null;
-            while (e = document.getElementById("search_group_list").lastChild) {
-                document.getElementById("search_group_list").removeChild(e);
-            }
-         matching_groups = fetch('POST /auth/signup/groups HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+
+        .column {
+            width: 33%;
+            padding: 30px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .inside_div {
+            border-style: solid;
+            border-color: #0686fd;
+            height: 65vh;
+            overflow: auto;
+            padding-left: 1vh;
+            padding-right: 1vh;
+        }
+    </style>
+
+</head>
+
+<script>
+    var matching_groups = [];
+    var friends_for_group = [];
+
+    // TODO: connect with the backend
+    var group_list = fetch('POST /auth/signup/groups HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+        .then(response => response.json());
+
+    // TODO: connect with the backend
+    var friend_list = fetch('POST /auth/signup/friends HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+        .then(response => response.json());
+
+    function join_group(group_index) {
+        // TODO: conect with the backend and join the group
+
+        let b = document.getElementById("search_group_list").children[group_index].children[0];
+        b.disabled = true;
+        b.innerText = "Pending";
+    }
+
+    function search_group() {
+        let e = null;
+        while (e = document.getElementById("search_group_list").lastChild) {
+            document.getElementById("search_group_list").removeChild(e);
+        }
+        matching_groups = fetch('POST /auth/signup/groups HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
             .then(response => response.json());
-            for (let i=0 ; i<matching_groups.length ; i++) {
-                if (matching_groups[i].trim().length >= 5){
-                    let p = document.createElement("p");
-                    p.innerText = matching_groups[i];
-
-                    let b = document.createElement("button");
-                    let f = "join_group(" + i + ")";
-                    b.innerText = "Join";
-                    b.setAttribute("onclick", f);
-                    b.setAttribute("style", "float:right;");
-
-                    p.appendChild(b);
-                    document.getElementById("search_group_list").appendChild(p);
-                }
-            }
-
-        }
-
-        function add_friend_to_group(i) {
-            current = document.getElementById("div_friend_list").children[i].children[0].textContent; 
-            if (current == "Remove") {
-                var new_list = [];
-                for (let index=0 ; index<friends_for_group.length ; index++) {
-                    if (friends_for_group[index].trim() != document.getElementById("div_friend_list").children[i].textContent.split("Remove")[0].trim()) {
-                        new_list.push(friends_for_group[index]);
-                    }
-                }
-                friends_for_group = new_list;
-                if (new_list.length <= 0) {
-                    document.getElementById("create_group_button").disabled = true;
-                }
-            } else {
-                friends_for_group.push(document.getElementById("div_friend_list").children[i].textContent.split("Add")[0]);
-                document.getElementById("create_group_button").removeAttribute("disabled");
-            }
-            document.getElementById("div_friend_list").children[i].children[0].textContent = document.getElementById("div_friend_list").children[i].children[0].textContent == "Remove" ? "Add" : "Remove";
-        }
-
-        function create_group() {
-            var name = "";
-            while (name == "") {
-                name = prompt("Name for the group: ");
-            }
-
-            
-            for (var i=1 ; i<document.getElementById("div_friend_list").children.length ; i++) {
-                document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
-            }
-
-            friends_for_group = [];
-            
-            // show new group in group list (only if successfull)
-            if (true) {
+        for (let i = 0; i < matching_groups.length; i++) {
+            if (matching_groups[i].trim().length >= 5) {
                 let p = document.createElement("p");
-                p.innerText = name;
-                //let b1 = document.createElement("button");
-                let b2 = document.createElement("button");
-                //b1.innerText = "Details";
-                b2.innerText = "Split bill";
-                b2.setAttribute("style", "float:right; margin-left: 5px");
-                //b1.setAttribute("style", "float:right;");
-                //b1.disabled = true;
-                p.appendChild(b2);
-                //p.appendChild(b1);
-                document.getElementById("div_my_groups").appendChild(p);            
-            }
+                p.innerText = matching_groups[i];
 
-            document.getElementById("create_group_button").disabled = true;
+                let b = document.createElement("button");
+                let f = "join_group(" + i + ")";
+                b.innerText = "Join";
+                b.setAttribute("onclick", f);
+                b.setAttribute("style", "float:right;");
+
+                p.appendChild(b);
+                document.getElementById("search_group_list").appendChild(p);
+            }
         }
 
-    </script>
+    }
+
+    function add_friend_to_group(i) {
+        current = document.getElementById("div_friend_list").children[i].children[0].textContent;
+        if (current == "Remove") {
+            var new_list = [];
+            for (let index = 0; index < friends_for_group.length; index++) {
+                if (friends_for_group[index].trim() != document.getElementById("div_friend_list").children[i].textContent.split("Remove")[0].trim()) {
+                    new_list.push(friends_for_group[index]);
+                }
+            }
+            friends_for_group = new_list;
+            if (new_list.length <= 0) {
+                document.getElementById("create_group_button").disabled = true;
+            }
+        } else {
+            friends_for_group.push(document.getElementById("div_friend_list").children[i].textContent.split("Add")[0]);
+            document.getElementById("create_group_button").removeAttribute("disabled");
+        }
+        document.getElementById("div_friend_list").children[i].children[0].textContent = document.getElementById("div_friend_list").children[i].children[0].textContent == "Remove" ? "Add" : "Remove";
+    }
+
+    function create_group() {
+        var name = "";
+        while (name == "") {
+            name = prompt("Name for the group: ");
+        }
+
+
+        for (var i = 1; i < document.getElementById("div_friend_list").children.length; i++) {
+            document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
+        }
+
+        friends_for_group = [];
+
+        // show new group in group list (only if successfull)
+        if (true) {
+            let p = document.createElement("p");
+            p.innerText = name;
+            //let b1 = document.createElement("button");
+            let b2 = document.createElement("button");
+            //b1.innerText = "Details";
+            b2.innerText = "Split bill";
+            b2.setAttribute("style", "float:right; margin-left: 5px");
+            //b1.setAttribute("style", "float:right;");
+            //b1.disabled = true;
+            p.appendChild(b2);
+            //p.appendChild(b1);
+            document.getElementById("div_my_groups").appendChild(p);
+        }
+
+        document.getElementById("create_group_button").disabled = true;
+    }
+
+</script>
 
 <body>
 
@@ -153,58 +155,71 @@
         <a href="#" disabled>Help</a>
     </div>
     
-    <span onclick="openNav()" class="Options">Options</span>
+    <header>
+        <span onclick="openNav()" class="Options">Options</span>
 
-    <div id="lout">
-    <a href="login.html">Log-out</a>
-    </div>
+        <div id="lout">
+            <a href="login.html">Log-out</a>
+        </div>
+
+        <div class="wrapper">
+            <!-- Use any element to open the sidenav -->
+            <h1>payShare</h1><br><br>
+        </div>
+    </header>
 
     <div class="row">
         <div class="column" style="background-color:white;">
-          <h2>Group list</h2>
-          <div class="inside_div" id="div_my_groups">
-            <script>
-                for (let i=0 ; i<group_list.length ; i++) {
-                    document.write("<p>");
-                    document.write(group_list[i]);
-                    document.write("<button style='float:right; margin-left: 5px' type='button'> Split bill </button>")
-                    //document.write("<button style='float:right;' type='button' disabled> Details </button>")
-                    document.write("</p>");
-                }
-            </script>
-          </div>
-        </div>
-        <div class="column" style="background-color:white;">
-          <h2>Search friends for new group</h2>
-          <div class="inside_div" id="div_friend_list">
-            <script>
-                for (let i=0 ; i<friend_list.length ; i++) {
-                    document.write("<p>");
-                    document.write(friend_list[i]);
-                    let f_str = "add_friend_to_group(" + (i+1) + ")";
-                    document.write("<button style='float:right;' type='button' onclick='" + f_str + "'> Add </button>");
-                    document.write("</p>");
-                }
-            </script>
-          </div>
-          <br>
-          <button type="button" onclick="create_group()" disabled id="create_group_button">Create group</button>
-        </div>
-        <div class="column" style="background-color:white;">
-          <h2>Search groups</h2>
-          <div class="inside_div">
-              <input type="text" placeholder="Search groups" id="group_search" onkeyup="search_group()" style="width:100%;">
-              <div id="search_group_list">
+            <h2>Group list</h2>
+            <div class="inside_div" id="div_my_groups">
                 <script>
+                    for (let i = 0; i < group_list.length; i++) {
+                        document.write("<p>");
+                        document.write(group_list[i]);
+                        document.write("<button style='float:right; margin-left: 5px' type='button'> Split bill </button>")
+                        //document.write("<button style='float:right;' type='button' disabled> Details </button>")
+                        document.write("</p>");
+                    }
                 </script>
-              </div>
-          </div>
+            </div>
         </div>
-      </div>
+        <div class="column" style="background-color:white;">
+            <h2>Search friends for new group</h2>
+            <div class="inside_div" id="div_friend_list">
+                <script>
+                    for (let i = 0; i < friend_list.length; i++) {
+                        document.write("<p>");
+                        document.write(friend_list[i]);
+                        let f_str = "add_friend_to_group(" + (i + 1) + ")";
+                        document.write("<button style='float:right;' type='button' onclick='" + f_str + "'> Add </button>");
+                        document.write("</p>");
+                    }
+                </script>
+            </div>
+            <br>
+            <button type="button" style = 'float:right' onclick="create_group()" disabled id="create_group_button">Create group</button>
+        </div>
+        <div class="column" style="background-color:white;">
+            <h2>Search groups</h2>
+            <div class="inside_div">
+                <input type="text" placeholder="Search groups" id="group_search" onkeyup="search_group()"
+                    style="width:100%;">
+                <div id="search_group_list">
+                    <script>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">payShare is a project made by group of PWR student. All rights are reserverd &copy; 2022</span>
+        </div>
+    </footer>
     <script>
         function openNav() {
-            document.getElementById("mySidenav").style.width = "500px";
+            document.getElementById("mySidenav").style.width = "400px";
         }
 
         function closeNav() {
@@ -214,4 +229,3 @@
 </body>
 
 </html>
-

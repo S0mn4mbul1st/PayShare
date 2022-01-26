@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="manage-style.css">
 
+
+
   <title>Document</title>
 </head>
 
@@ -21,10 +23,21 @@
     <a href="bills.html">Bills</a>
     <a href="#" disabled>Help</a>
   </div>
+  <header>
+    <span onclick="openNav()" class="Options">Options</span>
 
-  <span onclick="openNav()" class="Options">Options</span>
+    <div id="lout">
+        <a href="login.html">Log-out</a>
+    </div>
+
+    <div class="wrapper">
+        <!-- Use any element to open the sidenav -->
+        <h1>payShare</h1><br><br>
+    </div>
+</header>
+
   <div class="parent">
-    <h1>Split by category</h1>
+    <h2>Split by category</h1>
 
     <div class="child-one">
       <br>
@@ -49,7 +62,7 @@
   </div>
 
   <div class="parent2">
-    <h1>Log payment</h1>
+    <h2>Log payment</h1>
     <form method="post" action="/expenses">
       <div class="child-two">
         <br>
@@ -75,7 +88,7 @@
 
 
   <div class="parent3">
-    <h1>Split by time</h1>
+    <h2>Split by time</h1>
 
     <div class="child-three">
       <label for="fname">Select period:</label>
@@ -104,6 +117,12 @@
     </div>
   </div>
 
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">payShare is a project made by group of PWR student. All rights are reserverd &copy; 2022</span>
+    </div>
+  </footer>
+
   <script>
     var payments = [];
     function calculate() {
@@ -125,7 +144,7 @@
       document.getElementById("week4-t").innerHTML = "&nbsp; &nbsp;" + week4 / 100 * total + "€";
     }
     function openNav() {
-      document.getElementById("mySidenav").style.width = "500px";
+      document.getElementById("mySidenav").style.width = "400px";
     }
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";

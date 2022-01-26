@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="bills-style.css">
-
   <title>payShare Bills</title>
 </head>
 
@@ -22,17 +21,23 @@
     <a href="#" disabled>Help</a>
   </div>
 
-  <div id="lout">
-    <a href="login.html">Log-out</a>
-</div>
+  <header>
+    <span onclick="openNav()" class="Options">Options</span>
 
-  <span onclick="openNav()" class="Options">Options</span>
-  <div class="parent">
-    <h1>Active Bills</h1>
+    <div id="lout">
+      <a href="login.html">Log-out</a>
+    </div>
+
+    <div class="wrapper">
+      <!-- Use any element to open the sidenav -->
+      <h1>payShare</h1><br><br>
+    </div>
+  </header>
+<br>
+<div class="parent">
+  <h2>Active Bills</h2>
 
     <div class="child-one">
-      <br>
-
       <!--<input type="text" id="category" name="category" > --><br><br>
       &nbsp; &nbsp; <label for="lname">Bill:</label> <br><br>
 
@@ -42,58 +47,66 @@
       <p id="second"></p>
       <button onclick="pay2()" id="pay2" style="display: none;">Pay</button>
     </div>
-  </div>
+    </div>
 
-  <div class="parent2">
-    <h1>Pending Bills</h1>
-    <div class="child-two">
-      <br>
-      <br>
-      &nbsp; &nbsp;<p id="amount">Amount: 4.00€</p><br> <br> <br> <br>
+    <div class="parent2">
+      <h2>Pending Bills</h1>
+      <div class="child-two">
+        <br>
+        <br>
+        &nbsp; &nbsp;<p id="amount">Amount: 4.00€</p><br> <br> <br> <br>
 
-      &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
-      <select name="cat" id="cat">
+        &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
+        <select name="cat" id="cat">
 
-        <option value="Bill:">Bill</option>
-      </select>
-      <br>
-      <br>
-      <button onclick="accept()">Accept</button>
-    </div> 
-  </div>
-  </div>
+          <option value="Bill:">Bill</option>
+        </select>
+        <br>
+        <br>
+        <button onclick="accept()">Accept</button>
+      </div>
+    </div>
+    </div>
 
-  <div class="parent3">
-    <a href="newbill.html"><button>Create New Bill</button></a>
-  </div>
+    <div class="parent3">
+      <a href="newbill.html"><button>Create New Bill</button></a>
+    </div>
 
-  <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "500px";
-        }
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
 
-        openNav();
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted">payShare is a project made by group of PWR student. All rights are reserverd &copy;
+          2022</span>
+      </div>
+    </footer>
 
-        function pay(){
-          pay = document.getElementById("pay");
-          pay.setAttribute("disabled", "true");
-        }
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "400px";
+      }
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
 
-        function pay2(){
-          pay = document.getElementById("pay2");
-          pay.setAttribute("disabled", "true");
-        }
+      openNav();
 
-        function accept(){
-          p = document.getElementById("second")
-          document.getElementById("amount").innerHTML = "";
-          p.innerHTML = "Total: 4.00€";
-          document.getElementById("pay2").setAttribute("style", "");
-        }
-  </script>
+      function pay() {
+        pay = document.getElementById("pay");
+        pay.setAttribute("disabled", "true");
+      }
+
+      function pay2() {
+        pay = document.getElementById("pay2");
+        pay.setAttribute("disabled", "true");
+      }
+
+      function accept() {
+        p = document.getElementById("second")
+        document.getElementById("amount").innerHTML = "";
+        p.innerHTML = "Total: 4.00€";
+        document.getElementById("pay2").setAttribute("style", "");
+      }
+    </script>
 
 </body>
 

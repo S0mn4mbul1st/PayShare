@@ -10,12 +10,20 @@
     <title>Friends</title>
 
     <style>
+         * {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            float: center;
+            
+        }
         .column {
-            width: 40%;
+            width: 30%;
+            padding: 30px;
         }
 
         .list_div {
             border-style: solid;
+            border-color: #0686fd;
             height: 50vh;
             overflow: auto;
             padding-left: 10px;
@@ -26,6 +34,13 @@
             border-style: none;
             margin: 1%;
         }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
     </style>
 </head>
 
@@ -90,11 +105,18 @@
         <a href="#" disabled>Help</a>
     </div>
 
-    <span onclick="openNav()" class="Options">Options</span>
+    <header>
+        <span onclick="openNav()" class="Options">Options</span>
 
-    <div id="lout">
-        <a href="login.html">Log-out</a>
-    </div>
+        <div id="lout">
+            <a href="login.html">Log-out</a>
+        </div>
+
+        <div class="wrapper">
+            <!-- Use any element to open the sidenav -->
+            <h1>payShare</h1><br><br>
+        </div>
+    </header>
 
     <div id="main">
         <div class="column" style="float: left;">
@@ -130,11 +152,18 @@
                 </div>
             </form>
         </div>
+        
     </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">payShare is a project made by group of PWR student. All rights are reserverd &copy; 2022</span>
+        </div>
+    </footer>
 
     <script>
         function openNav() {
-            document.getElementById("mySidenav").style.width = "500px";
+            document.getElementById("mySidenav").style.width = "400px";
         }
 
         function closeNav() {

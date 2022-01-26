@@ -12,7 +12,8 @@ body
 .parent{
     position: absolute;
     top: 50px;
-    left: 55px;   
+    left: 200px;  
+    text-align: center; 
 }
 
 .parent h1{
@@ -26,25 +27,21 @@ body
     position: relative;
     height: 600px;
     width: 400px;
-    top: 10px;
+
 
     text-align: center;    
 
 	border-radius: 5%;
 
 }
-.child-one input {
-    position: relative;
-    width: 75px;
-    left: 10px;
-}
+
 
 /* Child two */
 
 .parent2{
     position: absolute;
     top: 50px;
-    left: 500px;
+    left: 750px;
     text-align: center;    
     
 }
@@ -61,23 +58,17 @@ body
     height: 600px;
     width: 400px;
     
+    text-align: center;    
 
 	border-radius: 5%;
 
 
 }
 
-.child-two input {
-    position: relative;
-    width: 75px;
-    left: 20px;
-    
-}
-
 .parent3 {
-  position: relative;
-  top: 600px;
-  left: 1000px;
+  position: absolute;
+  top: 700px;
+  left: 1200px;
   height: 50px;
   width: 400px;
 }
@@ -150,12 +141,71 @@ body
   .sidenav a {font-size: 18px;}
 }
 
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
 
+footer { 
+  position: absolute;
+  bottom:0;
+  width:100%;
+  height:60px;   /* Height of the footer */
+  text-align: right;
+}
 
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
 
+footer { 
+  position: absolute;
+  bottom:0;
+  width:100%;
+  height:60px;   /* Height of the footer */
+  text-align: right;
+}
 
+#lout {
+  position: relative;
+  float: right;
+}
+
+header {
+  position: relative;
+  top:0px;
+  height: 60px;
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  color: #0686fd;
+}
 
 
 
