@@ -37,8 +37,10 @@
       &nbsp; &nbsp; <label for="lname">Bill:</label> <br><br>
 
       &nbsp; &nbsp;<label for="total">Total: </label>
-      <input type="text" id="total" name="total">&nbsp; &nbsp;
-      <button onclick="calculate()">Pay</button>
+      <p>Total: 5.00€</p>
+      <button onclick="pay()" id="pay">Pay</button>
+      <p id="second"></p>
+      <button onclick="pay2()" id="pay2" style="display: none;">Pay</button>
     </div>
   </div>
 
@@ -47,8 +49,7 @@
     <div class="child-two">
       <br>
       <br>
-      &nbsp; &nbsp;<label for="fname">Amount:</label>
-      <input type="text" id="value" name="value"><br> <br> <br> <br>
+      &nbsp; &nbsp;<p id="amount">Amount: 4.00€</p><br> <br> <br> <br>
 
       &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
       <select name="cat" id="cat">
@@ -57,7 +58,7 @@
       </select>
       <br>
       <br>
-      <button onclick="show()">Accept</button>
+      <button onclick="accept()">Accept</button>
     </div> 
   </div>
   </div>
@@ -75,6 +76,23 @@
         }
 
         openNav();
+
+        function pay(){
+          pay = document.getElementById("pay");
+          pay.setAttribute("disabled", "true");
+        }
+
+        function pay2(){
+          pay = document.getElementById("pay2");
+          pay.setAttribute("disabled", "true");
+        }
+
+        function accept(){
+          p = document.getElementById("second")
+          document.getElementById("amount").innerHTML = "";
+          p.innerHTML = "Total: 4.00€";
+          document.getElementById("pay2").setAttribute("style", "");
+        }
   </script>
 
 </body>

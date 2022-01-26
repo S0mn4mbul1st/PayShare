@@ -1,13 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    var matching_friends = [];
+    var friends_in_bill = [];
+    var default_values = {};
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>payShare New Bill</title>
+    <title>Friends</title>
+
+    <style>
+        .column {
+            width: 40%;
+        }
+
+        input {
+            border-style: solid;
+        }
+
+        .list_div {
+            border-style: solid;
+            height: 50vh;
+            overflow: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
 </head>
+
+<script>
+    function create_bill() {
+        // TODO: connect to the backend and create the bill
+        window.location.href = "home.html";
+    }
+
+    function write_bill_name() {
+        if (document.getElementById("bill_name_input").value.length > 0) {
+            document.getElementById("input_amount").disabled = false;
+        } else {
+            document.getElementById("input_amount").disabled = true;
+        }
+    }
+
+    function write_bill_amount() {
+        document.getElementById("bill_name_input").disabled = true;
+        if (document.getElementById("input_amount").value > 0) {
+            document.getElementById("friend_search").disabled = false;
+        } else {
+            document.getElementById("friend_search").disabled = true;
+        }
+    }
+
+    function add_friend_to_bill(i) {
+        document.getElementById("finish_adding").disabled = false;
+
+        let p = document.getElementById("friend_list_div").children[i];
+        let username = p.innerText.split("Add to bill")[0].trim();
+        p.children[0].disabled = true;
+        if (!friends_in_bill.includes(username)) {
+            friends_in_bill.push(username);
+            default_values[username] = true;
+        }
+
+        let friend_div = document.createElement("div");
+        let p_username = document.createElement("p");
+        let input_value = document.createElement("input");
+        let p_percentage = document.createElement("p");
+
+
+        p_username.innerText = username + " ";
+        input_value.setAttribute("type", "number");
+        input_value.setAttribute("min", "0.01");
+        input_value.setAttribute("max", document.getElementById("input_amount").value.toString());
+        input_value.setAttribute("step", "0.01");
+        input_value.disabled = true;
+
+        friend_div.appendChild(p_username);
+        p_username.appendChild(input_value);
+        p_username.appendChild(p_percentage);
+
+        document.getElementById("friends_in_bill_div").append(friend_div);
+        document.getElementById("create_button").disabled = false;
+
+    }
+
+    function search_friend() {
+        document.getElementById("input_amount").disabled = true;
+
+        let e = null;
+        while (document.getElementById("friend_list_div").children.length > 0) {
+            e = document.getElementById("friend_list_div").children[0];
+            document.getElementById("friend_list_div").removeChild(e);
+        }
+
+        // TODO: search using the backend, store the names (or usernames) of the matches in the next list
+
+        for (let i = 0; i < matching_friends.length; i++) {
+            let p_username = document.createElement("p");
+            let b_button = document.createElement("button");
+
+            p_username.innerText = matching_friends[i];
+            b_button.setAttribute("style", "float: right;");
+            b_button.setAttribute("type", "button");
+            b_button.innerText = "Add to bill";
+            let f = "add_friend_to_bill(" + i + ")";
+            b_button.setAttribute("onclick", f);
+            p_username.appendChild(b_button);
+            document.getElementById("friend_list_div").appendChild(p_username);
+        }
+    }
+
+    function finish_adding_friends() {
+        document.getElementById("friend_search").disabled = true;
+        document.getElementById("finish_adding").disabled = true;
+
+        let e = null;
+        while (document.getElementById("friend_list_div").children.length > 0) {
+            e = document.getElementById("friend_list_div").children[0];
+            document.getElementById("friend_list_div").removeChild(e);
+        }
+
+        document.getElementById("create_button").disabled = false;
+        document.getElementById("div_2").disabled = false;
+        document.getElementById("friends_in_bill_div").setAttribute("style", "background-color: white;");
+
+        for (let i = 0; i < friends_in_bill.length; i++) {
+            //document.getElementById("friends_in_bill_div").children[i].children[0].children[0].disabled = false;
+        }
+
+        let total_amount = document.getElementById("input_amount").value;
+        let number_of_friends = friends_in_bill.length;
+        let amount_per_friend = Math.round((total_amount / number_of_friends) * 100) / 100;
+        let amount_first_friend = total_amount - amount_per_friend * (number_of_friends - 1);
+
+        for (let i = 0; i < friends_in_bill.length; i++) {
+            document.getElementById("friends_in_bill_div").children[i].children[0].children[0].value = i == 0 ? amount_first_friend : amount_per_friend;
+        }
+    }
+
+</script>
+
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -24,15 +161,58 @@
     <div id="lout">
         <a href="login.html">Log-out</a>
     </div>
+    <form method="post" action="/groupId/expenses">
+        <div id="main">
+            <div class="column" style="float: left;">
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <p>Bill name: </p>
+                        </td>
+                        <td width="50%">
+                            <input style="width: 100%;" type="text" id="bill_name_input" onkeyup="write_bill_name()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Total: </p>
+                        </td>
+                        <td>
+                            <input style="width: 100%;" type="number" min="0.01" step="0.01" id="input_amount" disabled
+                                onkeyup="write_bill_amount()">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="text" style="width: 40%" placeholder="Add friend" id="friend_search"
+                    onkeyup="search_friend()" disabled>
+                <br>
+                <div style="border-style: solid;" class="list_div" id="friend_list_div">
+                </div>
+                <br>
+                <button onclick="finish_adding_friends()" id="finish_adding" disabled>Done adding friends</button>
+            </div>
+
+            <div class="column" style="float: right;;" id="div_2" disabled>
+                <p>Bill sumary</p>
+                <div style="height: 68vh; background-color: lightgray" class="list_div" id="friends_in_bill_div">
+
+                </div>
+                <br>
+                <button onclick="create_bill()" id="create_button" disabled>Done</button>
+            </div>
+        </div>
+    </form>
 
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "500px";
         }
+
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-        openNav();
     </script>
 </body>
+
 </html>

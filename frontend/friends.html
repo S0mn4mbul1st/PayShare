@@ -1,131 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles.css">
-        <title>Friends</title>
 
-        <style>
-            .column {width: 40%;}
-            .list_div {border-style: solid; height: 50vh; overflow: auto; padding-left: 10px; padding-right: 10px;}
-            .current_friend {border-style: none; margin: 1%;}
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Friends</title>
 
-    <script>
-        var matching_users = [];
-
-        function split_bill_with_friend(friend_name) {
-            // TODO: redirect to webpage for spliting bills
-            
+    <style>
+        .column {
+            width: 40%;
         }
 
-        function add_friend(i) {
-            document.getElementById("users_search_list").children[i+1].children[0].innerText = "Pending";
-            document.getElementById("users_search_list").children[i+1].children[0].disabled = true;
-            // TODO: call the backend and add new friend
+        .list_div {
+            border-style: solid;
+            height: 50vh;
+            overflow: auto;
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
-        function search_user() {
-            let e = null;
-            while (document.getElementById("users_search_list").children.length > 1) {
-                e = document.getElementById("users_search_list").children[0];   
-                if (e == document.getElementById("friend_search"))
-                {
-                    e = document.getElementById("users_search_list").children[1];
-                }
-                document.getElementById("users_search_list").removeChild(e);
-            }
+        .current_friend {
+            border-style: none;
+            margin: 1%;
+        }
+    </style>
+</head>
 
-            // TODO: search using the backend, store the name (or username) of the matches in the list
-            if (document.getElementById("friend_search").value.endsWith(" ")) {
-                matching_users = [document.getElementById("friend_search").value.trim()+" García", document.getElementById("friend_search").value.trim()+" Romero",  document.getElementById("friend_search").value.trim()+" Suárez",  document.getElementById("friend_search").value.trim()+" Menéndez", document.getElementById("friend_search").value.trim()+" Rodríguez", document.getElementById("friend_search").value.trim()+" Noriega"].sort();
-            } else 
-            { 
-                matching_users.clear();
-            }
+<script>
+    var matching_users = [];
 
-            for (let i=0 ; i<matching_users.length ; i++) {
-                if (matching_users[i].trim().length >= 4) {
-                    let p_username = document.createElement('p');
-                    let b_button = document.createElement('button');
-                    
-                    p_username.innerText = matching_users[i];
-                    b_button.setAttribute("style", "float:right");
-                    b_button.setAttribute("type", "button");
-                    b_button.innerHTML = "Add friend";
-                    let f = "add_friend(" +  i  + ")";
-                    b_button.setAttribute("onclick", f);
-    
-                    p_username.appendChild(b_button);
-                    document.getElementById("users_search_list").appendChild(p_username);
-                }
+    function split_bill_with_friend(friend_name) {
+        // TODO: redirect to webpage for spliting bills
+
+    }
+
+    function add_friend(i) {
+        document.getElementById("users_search_list").children[i + 1].children[0].innerText = "Pending";
+        document.getElementById("users_search_list").children[i + 1].children[0].disabled = true;
+        // TODO: call the backend and add new friend
+    }
+
+    function search_user() {
+        let e = null;
+        while (document.getElementById("users_search_list").children.length > 1) {
+            e = document.getElementById("users_search_list").children[0];
+            if (e == document.getElementById("friend_search")) {
+                e = document.getElementById("users_search_list").children[1];
+            }
+            document.getElementById("users_search_list").removeChild(e);
+        }
+
+        // TODO: search using the backend, store the name (or username) of the matches in the list
+        if (document.getElementById("friend_search").value.endsWith(" ")) {
+            matching_users = [document.getElementById("friend_search").value.trim() + " García", document.getElementById("friend_search").value.trim() + " Romero", document.getElementById("friend_search").value.trim() + " Suárez", document.getElementById("friend_search").value.trim() + " Menéndez", document.getElementById("friend_search").value.trim() + " Rodríguez", document.getElementById("friend_search").value.trim() + " Noriega"].sort();
+        } else {
+            matching_users.clear();
+        }
+
+        for (let i = 0; i < matching_users.length; i++) {
+            if (matching_users[i].trim().length >= 4) {
+                let p_username = document.createElement('p');
+                let b_button = document.createElement('button');
+
+                p_username.innerText = matching_users[i];
+                b_button.setAttribute("style", "float:right");
+                b_button.setAttribute("type", "button");
+                b_button.innerHTML = "Add friend";
+                let f = "add_friend(" + i + ")";
+                b_button.setAttribute("onclick", f);
+
+                p_username.appendChild(b_button);
+                document.getElementById("users_search_list").appendChild(p_username);
             }
         }
-    </script>
+    }
+</script>
 
-    <body>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="home.html">Home</a>
-            <a href="friends.html">Friends</a>
-            <a href="groups.html">Groups</a>
-            <a href="manage.html">Manage Expenses</a>
-            <a href="bills.html">Bills</a>
-            <a href="#" disabled>Help</a>
-        </div>
-        
-        <span onclick="openNav()" class="Options">Options</span>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="home.html">Home</a>
+        <a href="friends.html">Friends</a>
+        <a href="groups.html">Groups</a>
+        <a href="manage.html">Manage Expenses</a>
+        <a href="bills.html">Bills</a>
+        <a href="#" disabled>Help</a>
+    </div>
 
-        <div id="lout">
+    <span onclick="openNav()" class="Options">Options</span>
+
+    <div id="lout">
         <a href="login.html">Log-out</a>
+    </div>
+
+    <div id="main">
+        <div class="column" style="float: left;">
+            <h2 style="text-align: center;">Friend list</h2>
+            <div class="list_div">
+                <p id="no_friends">You have no friends yet</p>
+
+                <script>
+                    // TODO: search using the backend for the friends. Store the name (or username) of all friends in the next list.
+                    var friend_list = fetch('POST /auth/signup HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+                        .then(response => response.json());
+
+                    if (friend_list.length > 0) {
+                        document.getElementById("no_friends").remove();
+                        for (let i = 0; i < friend_list.length; i++) {
+                            document.write("<div class=\"current_friend\">");
+                            document.write("<p>" + friend_list[i]);
+                            let f_str = "split_bill_with_friend(friend_list[" + i + "])";
+                            document.write("<button style='float:right;' type=\"button\" onclick=\"" + f_str + "\">Split bill</button>");
+                            document.write("</p>" + "</div>");
+                        }
+                    }
+                </script>
+
+            </div>
         </div>
 
-        <div id="main">
-            <div class="column" style="float: left;">
-                <h2 style="text-align: center;">Friend list</h2>
-                <div class="list_div">
-                    <p id="no_friends">You have no friends yet</p>
-            
-                    <script>
-                        // TODO: search using the backend for the friends. Store the name (or username) of all friends in the next list.
-                        var friend_list =  ["David Gonzalez", "Lorenzo Morini", "Agustín García", "Daniel Fernandez", "Alexander Müller", "John Foster", "Juan Menéndez", "Lucas Martínez", "Aykhan Imanov", "Tania Marchena"].sort();
-                        
-                        if (friend_list.length > 0) {
-                            document.getElementById("no_friends").remove();
-                            for (let i=0; i<friend_list.length ; i++) {
-                                document.write("<div class=\"current_friend\">");
-                                document.write("<p>" + friend_list[i]);
-                                let f_str = "split_bill_with_friend(friend_list[" + i + "])";
-                                document.write("<button style='float:right;' type=\"button\" onclick=\"" + f_str + "\">Split bill</button>");
-                                document.write("</p>" + "</div>");
-                            }
-                        }
-                    </script>
-            
-                </div>
-            </div>
-            
-            <div class="column" style="float: right;">
-                <h2 style="text-align: center;">Search users:</h2>
+        <div class="column" style="float: right;">
+            <h2 style="text-align: center;">Search users:</h2>
+            <form method="post" action="/frienships">
                 <div class="list_div" id="users_search_list">
                     <input type="text" placeholder="Search users" id="friend_search" onkeyup="search_user()">
                 </div>
-            </div>
+            </form>
         </div>
+    </div>
 
-        <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "500px";
-            }
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
 
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-            }
-        </script>
-    </body>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
 
 </html>

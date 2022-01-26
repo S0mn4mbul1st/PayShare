@@ -50,25 +50,27 @@
 
   <div class="parent2">
     <h1>Log payment</h1>
-    <div class="child-two">
-      <br>
-      <br>
-      &nbsp; &nbsp;<label for="fname">Amount:</label>
-      <input type="text" id="value" name="value"><br> <br> <br> <br>
+    <form method="post" action="/expenses">
+      <div class="child-two">
+        <br>
+        <br>
+        &nbsp; &nbsp;<label for="fname">Amount:</label>
+        <input type="text" id="value" name="value"><br> <br> <br> <br>
 
-      &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
-      <select name="cat" id="cat">
-        <option value="Electricity:">Electricity</option>
-        <option value="Food:">Food</option>
-        <option value="clothes:">Clothes</option>
-        <option value="Leisure:">Leisure</option>
-        <option value="Bill:">Bill</option>
-      </select>
-      <br>
-      <br>
-      <button onclick="add()">Submit Payment</button>
-      <button onclick="show()">Create expense report</button>
-    </div> 
+        &nbsp;&nbsp;<label for="lang">Category</label> &nbsp; &nbsp;
+        <select name="cat" id="cat">
+          <option value="Electricity:">Electricity</option>
+          <option value="Food:">Food</option>
+          <option value="clothes:">Clothes</option>
+          <option value="Leisure:">Leisure</option>
+          <option value="Bill:">Bill</option>
+        </select>
+        <br>
+        <br>
+        <button onclick="add()">Submit Payment</button>
+        <button onclick="show()">Create expense report</button>
+      </div>
+    </form>
   </div>
 
 
@@ -123,22 +125,22 @@
       document.getElementById("week4-t").innerHTML = "&nbsp; &nbsp;" + week4 / 100 * total + "€";
     }
     function openNav() {
-            document.getElementById("mySidenav").style.width = "500px";
-        }
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    function add(){
+      document.getElementById("mySidenav").style.width = "500px";
+    }
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    function add() {
       cat = document.getElementById("cat").value;
       value = document.getElementById("value").value;
       payments.push(cat + " " + value + "€");
       window.alert("Payment submitted");
       document.getElementById("value").value = "";
     }
-    function show(){
+    function show() {
       window.alert(getPayments());
     }
-    function getPayments(){
+    function getPayments() {
       ret = ""
       for (var i = 0; i < payments.length; i++)
         ret += payments[i] + "; ";
