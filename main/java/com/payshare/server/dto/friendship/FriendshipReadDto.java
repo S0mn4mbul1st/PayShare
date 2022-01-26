@@ -1,0 +1,10 @@
+package com.payshare.server.dto.friendship;
+
+import lombok.AllArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
+
+@AllArgsConstructor
+public class FriendshipReadDto extends RepresentationModel<FriendshipReadDto> {
+    public Long id;
+    public String personName;
+}
