@@ -41,7 +41,8 @@
 
 <script>
     function create_bill() {
-        // TODO: connect to the backend and create the bill
+        fetch('POST /auth/signup/createbill HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+            .then(response => response.json());
         window.location.href = "home.html";
     }
 
@@ -104,7 +105,8 @@
             document.getElementById("friend_list_div").removeChild(e);
         }
 
-        // TODO: search using the backend, store the names (or usernames) of the matches in the next list
+        matching_friends = fetch('POST /auth/signup/friends HTTP/1.1 Content-Type: application/json;charset=UTF-8 Content-Length: 45 Host: softstone.pl:8443 { "username" : "username", "password" : "password", "123456" : "user@gmail.com" }')
+        .then(response => response.json()).filter((c, w) => w.startsWith(document.getElementById("friend_search").value)).map((c,w) => w);
 
         for (let i = 0; i < matching_friends.length; i++) {
             let p_username = document.createElement("p");
